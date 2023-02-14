@@ -8,6 +8,16 @@ export const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const requirementsToEmail = email !== "" ? true : false
+  const requirementsToPassword = password.length >= "8" ? true : false
+  
+  const passwordMessage = password.length < "8" ? "A senha deve conter 8 dígitos" : ""
+
+  const requirementsToBtn =
+  requirementsToEmail && requirementsToPassword !== false
+    ? 'login-form-btn text-lg border-none rounded-xl text-white leading-[1.2] uppercase justify-center items-center w-full h-12 bg-gradient-to-l from-[#21d4fd] to-[#b721ff] transition-all hover:opacity-80 hover:cursor-pointer'
+    : 'opacity-30 login-form-btn text-base border-none rounded-xl text-white leading-[1.2] justify-center items-center w-full h-12 bg-gradient-to-l from-[#21d4fd] to-[#b721ff] transition-all'
+
   return (
     <LayoutComponents>
       <form className="login-form w-full flex flex-col justify-center items-center text-center">
@@ -59,12 +69,13 @@ export const Login = () => {
             data-paceholder="Password"
           ></span>
         </div>
+        <div className="password-span relative w-full">
+          <span className='text-xs text-[#999999] absolute bottom-4 right-[95px]'>{passwordMessage}</span>
+        </div>
 
         <div className="container-login-form-btn pb-3 w-full ">
           <button
-            className="login-form-btn text-lg border-none rounded-xl text-white leading-[1.2] uppercase justify-center items-center w-full h-12 bg-gradient-to-l from-[#21d4fd] to-[#b721ff] transition-all
-                hover:opacity-80 hover:cursor-pointer
-                "
+            className={requirementsToBtn}
           >
             Login
           </button>

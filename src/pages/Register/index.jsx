@@ -1,3 +1,5 @@
+//O botão está "disabled"
+
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
@@ -11,8 +13,22 @@ export const Register = () => {
   const [password, setPassword] = useState('')
   const [confirmedPassword, setConfirmedPassword] = useState('')
 
+  // const passwordValidation = (password) => {
+  //   const regexUppercase = RegExp(/^(?=.*[A-Z]).+$/)
+  //   const regexLowercase = RegExp(/^(?=.*[a-z]).+$/)
+  //   const regexNumber = RegExp(/^(?=.*[0-9]).+$/)
+  //   const length = password.length >= "8"
+  // }
+
+  const requirementsToName = name !== "" ? true : false
+  const requirementsToEmail = email !== "" ? true : false
+  const requirementsToPassword = password.length >= "8"
+  const requirementsToConfirmedPassword = confirmedPassword === password ? true : false
+
+  const passwordMessage = password.length < "8" ? "A senha deve conter 8 dígitos dentre: uma letra Maiúscula, uma letra minúscula, um número e um carácter especial" : ""
+
   const requirementsToBtn =
-    name && email && password && confirmedPassword !== ''
+    requirementsToName && requirementsToEmail && requirementsToPassword && requirementsToConfirmedPassword !== false
       ? 'login-form-btn text-lg border-none rounded-xl text-white leading-[1.2] uppercase justify-center items-center w-full h-12 bg-gradient-to-l from-[#21d4fd] to-[#b721ff] transition-all hover:opacity-80 hover:cursor-pointer'
       : 'opacity-30 login-form-btn text-base border-none rounded-xl text-white leading-[1.2] justify-center items-center w-full h-12 bg-gradient-to-l from-[#21d4fd] to-[#b721ff] transition-all'
 
@@ -88,6 +104,9 @@ export const Register = () => {
             data-paceholder="Senha"
           ></span>
         </div>
+        <div className="password-span relative w-96">
+          <span className='text-xs text-[#999999] absolute bottom-0 left-0'>{passwordMessage}</span>
+        </div>
 
         <div className="wrap-input w-full relative border-b-2 border-[#adadad] mb-9">
           <input
@@ -119,7 +138,7 @@ export const Register = () => {
         </div>
 
         <div className="container-login-form-btn pb-3 w-full ">
-          <button className={requirementsToBtn}>Confirmar Cadastro</button>
+          <button className={requirementsToBtn} disabled>Confirmar Cadastro</button>
         </div>
 
         <div className="text-create-login flex flex-col justify-center items-center mt-12">
