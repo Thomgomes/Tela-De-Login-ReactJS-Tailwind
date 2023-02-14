@@ -11,14 +11,12 @@ export const Register = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [validate, setValidate] = useState({
+    case: false,
+    number: false,
+    length: false,
+  })
   const [confirmedPassword, setConfirmedPassword] = useState('')
-
-  // const passwordValidation = (password) => {
-  //   const regexUppercase = RegExp(/^(?=.*[A-Z]).+$/)
-  //   const regexLowercase = RegExp(/^(?=.*[a-z]).+$/)
-  //   const regexNumber = RegExp(/^(?=.*[0-9]).+$/)
-  //   const length = password.length >= "8"
-  // }
 
   const requirementsToName = name !== "" ? true : false
   const requirementsToEmail = email !== "" ? true : false

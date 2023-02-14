@@ -1,3 +1,5 @@
+//o botão está desabilitado
+
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
@@ -75,7 +77,7 @@ export const Login = () => {
 
         <div className="container-login-form-btn pb-3 w-full ">
           <button
-            className={requirementsToBtn}
+            className={requirementsToBtn} disabled
           >
             Login
           </button>
