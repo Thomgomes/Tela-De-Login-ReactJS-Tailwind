@@ -11,24 +11,19 @@ export const Register = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [validate, setValidate] = useState({
-    case: false,
-    number: false,
-    length: false,
-  })
   const [confirmedPassword, setConfirmedPassword] = useState('')
 
-  const requirementsToName = name !== "" ? true : false
-  const requirementsToEmail = email !== "" ? true : false
+  const requirementsToName = name !== ""
+  const requirementsToEmail = email !== ""
   const requirementsToPassword = password.length >= "8"
-  const requirementsToConfirmedPassword = confirmedPassword === password ? true : false
+  const requirementsToConfirmedPassword = confirmedPassword === password
 
   const passwordMessage = password.length < "8" ? "A senha deve conter 8 dígitos dentre: uma letra Maiúscula, uma letra minúscula, um número e um carácter especial" : ""
 
   const requirementsToBtn =
     requirementsToName && requirementsToEmail && requirementsToPassword && requirementsToConfirmedPassword !== false
-      ? 'login-form-btn text-lg border-none rounded-xl text-white leading-[1.2] uppercase justify-center items-center w-full h-12 bg-gradient-to-l from-[#21d4fd] to-[#b721ff] transition-all hover:opacity-80 hover:cursor-pointer'
-      : 'opacity-30 login-form-btn text-base border-none rounded-xl text-white leading-[1.2] justify-center items-center w-full h-12 bg-gradient-to-l from-[#21d4fd] to-[#b721ff] transition-all'
+      ? 'login-form-btn pt-3.5 text-lg border-none rounded-xl text-white leading-[1.2] justify-center items-center w-full h-12 bg-gradient-to-l from-[#21d4fd] to-[#b721ff] transition-all hover:opacity-80 hover:cursor-pointer'
+      : 'opacity-30 pt-3.5 login-form-btn text-base border-none rounded-xl text-white leading-[1.2] justify-center items-center w-full h-12 bg-gradient-to-l from-[#21d4fd] to-[#b721ff] transition-all'
 
   return (
     <LayoutComponents>
@@ -135,8 +130,12 @@ export const Register = () => {
           />
         </div>
 
+        <div className="container-login-form-btn pb-3 w-1/3 ">
+          <div className="login-form-btn pt-1.5 text-base border-none rounded-xl text-white leading-[1.2] justify-center items-center w-full h-8 bg-gradient-to-l from-[#21d4fd] to-[#b721ff] transition-all hover:opacity-80 hover:cursor-pointer" >Validar</div>
+        </div>
+
         <div className="container-login-form-btn pb-3 w-full ">
-          <button className={requirementsToBtn} disabled>Confirmar Cadastro</button>
+          <div className={requirementsToBtn} disabled>Confirmar Cadastro</div>
         </div>
 
         <div className="text-create-login flex flex-col justify-center items-center mt-12">
@@ -156,6 +155,6 @@ export const Register = () => {
   )
 }
 
-;('login-form-btn text-lg border-none rounded-xl text-white leading-[1.2] uppercase justify-center items-center w-full h-12 bg-gradient-to-l from-[#21d4fd] to-[#b721ff] transition-all hover:opacity-80 hover:cursor-pointer')
+;('login-form-btn text-lg border-none rounded-xl text-white leading-[1.2] justify-center items-center w-full h-12 bg-gradient-to-l from-[#21d4fd] to-[#b721ff] transition-all hover:opacity-80 hover:cursor-pointer')
 
 // "opacity-30 login-form-btn text-base border-none rounded-xl text-white leading-[1.2] justify-center items-center w-full h-12 bg-gradient-to-l from-[#21d4fd] to-[#b721ff] transition-all"

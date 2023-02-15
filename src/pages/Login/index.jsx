@@ -5,19 +5,32 @@ import { useState } from 'react'
 
 import Tcode4 from '../../assets/Thom.Code-_1_.svg'
 import { LayoutComponents } from '../../components/layoutComponents'
+import { validateEmail, validatePassword } from '../../utils/regex'
 
 export const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const requirementsToEmail = email !== "" ? true : false
-  const requirementsToPassword = password.length >= "8" ? true : false
-  
-  const passwordMessage = password.length < "8" ? "A senha deve conter 8 dígitos" : ""
+  const [emailErr, setEmailErr] = useState(false)
+  const [passwordErr, setPasswordErr] = useState(false)
+
+  const validate = () => {
+    if(!validateEmail.test(email)){
+      setEmailErr(true)
+    }
+
+    if(!validatePassword.test(password)){
+      setPasswordErr(true)
+    }
+
+  }
+
+  const requirementsToEmail = email !== ""
+  const requirementsToPassword = password.length >= "8"
 
   const requirementsToBtn =
   requirementsToEmail && requirementsToPassword !== false
-    ? 'login-form-btn text-lg border-none rounded-xl text-white leading-[1.2] uppercase justify-center items-center w-full h-12 bg-gradient-to-l from-[#21d4fd] to-[#b721ff] transition-all hover:opacity-80 hover:cursor-pointer'
+    ? 'login-form-btn text-lg border-none rounded-xl text-white leading-[1.2]  justify-center items-center w-full h-12 bg-gradient-to-l from-[#21d4fd] to-[#b721ff] transition-all hover:opacity-80 hover:cursor-pointer'
     : 'opacity-30 login-form-btn text-base border-none rounded-xl text-white leading-[1.2] justify-center items-center w-full h-12 bg-gradient-to-l from-[#21d4fd] to-[#b721ff] transition-all'
 
   return (
@@ -50,6 +63,9 @@ export const Login = () => {
             data-paceholder="Email"
           ></span>
         </div>
+        <div className="password-span relative w-96">
+          {emailErr && <span className='text-xs text-[#999999] absolute bottom-4 right-[100px]'>Por favor digite um email valido!</span>}
+        </div>
 
         <div className="wrap-input w-full relative border-b-2 border-[#adadad] mb-9">
           <input
@@ -71,13 +87,13 @@ export const Login = () => {
             data-paceholder="Password"
           ></span>
         </div>
-        <div className="password-span relative w-full">
-          <span className='text-xs text-[#999999] absolute bottom-4 right-[95px]'>{passwordMessage}</span>
+        <div className="password-span relative w-96">
+          {passwordErr && <span className='text-xs text-[#999999] absolute bottom-4 right-[95px]'>Por favor digite uma senha valida!</span>}
         </div>
 
         <div className="container-login-form-btn pb-3 w-full ">
           <button
-            className={requirementsToBtn} disabled
+            className={requirementsToBtn}
           >
             Login
           </button>
